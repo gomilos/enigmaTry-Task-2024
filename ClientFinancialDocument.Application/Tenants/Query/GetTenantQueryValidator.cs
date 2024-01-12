@@ -13,7 +13,7 @@ namespace ClientFinancialDocument.Application.Tenants.Query
 
             RuleFor(tr => tr.TenantId)
             .MustAsync(async (TenantId, _) =>
-                await tenantRepository.IsSupportedTenantAsync(TenantId)
+                await tenantRepository.IsWhitelistedTenantAsync(TenantId)
             )
             .WithMessage($"Tenant is not whitelisted");
         }

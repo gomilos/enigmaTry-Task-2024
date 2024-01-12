@@ -1,4 +1,5 @@
 ﻿using ClientFinancialDocument.Application.Abstractions.Behaviors;
+using ClientFinancialDocument.Domain.Clients;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,7 @@ namespace ClientFinancialDocument.Application
             });
 
             services.AddValidatorsFromAssembly(assembly);
+            services.AddScoped<IClientService, ClientService>();
 
             return services;
         }

@@ -2,7 +2,9 @@
 {
     public interface IProductRepository
     {
-        public Task<Product?> GetProductByCodeAsync(string productCode);
-        Task<bool> IsSupportedProductAsync(string productCode);
+        Task<Product?> GetProductAsync(string productCode, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Product>> GetSupportedProductsAsync(CancellationToken cancellationToken = default);
+        Task<bool> IsSupportedProductAsync(string productCode, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Product>> GetNotSupportedProductAsync(CancellationToken cancellationToken = default);
     }
 }
