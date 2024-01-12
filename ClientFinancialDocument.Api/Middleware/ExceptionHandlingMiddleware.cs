@@ -1,5 +1,8 @@
-﻿using ClientFinancialDocument.Application.Exceptions;
+﻿using ClientFinancialDocument.Api.Extensions;
+using ClientFinancialDocument.Application.Exceptions;
+using ClientFinancialDocument.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ClientFinancialDocument.Api.Middleware
 {
@@ -53,10 +56,12 @@ namespace ClientFinancialDocument.Api.Middleware
             return exception switch
             {
                 ValidationException validationException => new ExceptionDetails(
-                    //StatusCodes.Status400BadRequest,
-                    StatusCodes.Status403Forbidden,
-                    "ValidationFailure",
-                    "Validation error",
+                //StatusCodes.Status400BadRequest,
+                //FIXME: if we need to have valid type of StatusCodes (default is 400 for Validation but EnigmaTry task is asking 403)
+                //it is better to use Response Pattern inside of Query/Command handlers
+                    ResultExtensions.GetResultProblemStatusCode((ErrorType)Enum.Parse(typeof(ErrorType), validationException.Errors.ToArray()[0].ErrorCode)),
+                "ValidationFailure",
+                "Validation error",
                     "One or more validation errors has occurred",
                     validationException.Errors),
 

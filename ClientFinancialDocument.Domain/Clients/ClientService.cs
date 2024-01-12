@@ -1,4 +1,4 @@
-﻿using ClientFinancialDocument.Domain.Abstraction;
+﻿using ClientFinancialDocument.Domain.Shared;
 
 namespace ClientFinancialDocument.Domain.Clients
 {
@@ -14,7 +14,10 @@ namespace ClientFinancialDocument.Domain.Clients
         public async Task<Result> IsClientPerTenantWhitelisted(Guid tenantId, Guid clientId)
         {
             var exist = await _clientRepository.IsClientWhitelistedByTenantIdAsync(tenantId, clientId);
-            if (exist == false) { return Result.Failure(ClientErrors.NotWhitelistedPerTenant); }
+            if (exist == false)
+            {
+                return Result.Failure(ClientErrors.NotWhitelistedPerTenant);
+            }
 
             return Result.Success();
         }

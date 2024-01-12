@@ -31,7 +31,8 @@ namespace ClientFinancialDocument.Application.Abstractions.Behaviors
                 .SelectMany(validationResult => validationResult.Errors)
                 .Select(validationFailure => new ValidationError(
                     validationFailure.PropertyName,
-                    validationFailure.ErrorMessage))
+                    validationFailure.ErrorMessage,
+                    validationFailure.ErrorCode))//NOTE: use this ErrorCode to set valid status in GLobal Exception Handler for API
                 .ToList();
 
             if (errors.Any())

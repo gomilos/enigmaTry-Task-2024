@@ -1,4 +1,5 @@
 ﻿using ClientFinancialDocument.Domain.Products;
+using ClientFinancialDocument.Domain.Shared;
 using FluentValidation;
 
 namespace ClientFinancialDocument.Application.Products.Query
@@ -15,7 +16,7 @@ namespace ClientFinancialDocument.Application.Products.Query
             .MustAsync(async (ProductCode, _) =>
                 await productRepository.IsSupportedProductAsync(ProductCode)
             )
-            .WithMessage("Product is not whitelisted");
+            .WithMessage("Product is not whitelisted").WithErrorCode(ErrorType.Forbiden.ToString());
         }
     }
 }

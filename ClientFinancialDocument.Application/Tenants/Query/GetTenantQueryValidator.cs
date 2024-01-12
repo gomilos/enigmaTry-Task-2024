@@ -1,4 +1,5 @@
-﻿using ClientFinancialDocument.Domain.Tenants;
+﻿using ClientFinancialDocument.Domain.Shared;
+using ClientFinancialDocument.Domain.Tenants;
 using FluentValidation;
 
 namespace ClientFinancialDocument.Application.Tenants.Query
@@ -15,7 +16,7 @@ namespace ClientFinancialDocument.Application.Tenants.Query
             .MustAsync(async (TenantId, _) =>
                 await tenantRepository.IsWhitelistedTenantAsync(TenantId)
             )
-            .WithMessage($"Tenant is not whitelisted");
+            .WithMessage($"Tenant is not whitelisted").WithErrorCode(ErrorType.Forbiden.ToString());
         }
     }
 }

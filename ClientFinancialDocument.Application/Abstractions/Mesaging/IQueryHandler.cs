@@ -1,4 +1,4 @@
-﻿using ClientFinancialDocument.Domain.Abstraction;
+﻿using ClientFinancialDocument.Domain.Shared;
 using MediatR;
 
 namespace ClientFinancialDocument.Application.Abstractions.Mesaging

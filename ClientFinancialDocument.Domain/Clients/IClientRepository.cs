@@ -7,8 +7,7 @@
         Task<Dictionary<Guid, IEnumerable<Client>>> GetNotWhitelistedClientsPerTenantAsync(CancellationToken cancellationToken = default);
         Task<Client?> GetClientAsync(Guid tenantId, Guid documentId, CancellationToken cancellationToken = default);
         Task<IEnumerable<Client>> GetWhitelistedClientsByTenantIdAsync(Guid tenantId, CancellationToken cancellationToken = default);
-        //Task<bool> IsWhitelistedClientAsync(Guid clientId, CancellationToken cancellationToken = default);
-        //Task<IEnumerable<Client>> GetWhitelistedClientsAsync(CancellationToken cancellationToken = default);
         Task<bool> IsClientWhitelistedByTenantIdAsync(Guid tenantId, Guid clientId, CancellationToken cancellationToken = default);
+        Task<Client?> GetClientByClientVATAsync(Guid clientVAT, CancellationToken cancellationToken = default);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace ClientFinancialDocument.Domain.Abstraction
+namespace ClientFinancialDocument.Domain.Shared
 {
     public class Result
     {

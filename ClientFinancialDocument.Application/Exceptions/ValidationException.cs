@@ -10,5 +10,5 @@
         public IReadOnlyCollection<ValidationError> Errors { get; }
     }
 
-    public record ValidationError(string PropertyName, string ErrorMessage);
+    public record ValidationError(string PropertyName, string ErrorMessage, string ErrorCode);
 }

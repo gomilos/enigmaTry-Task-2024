@@ -22,6 +22,12 @@ namespace ClientFinancialDocument.Infrastructure.Persistance
             return result.FirstOrDefault(cl => cl.TenantId.Equals(tenantId) && cl.DocumentId.Equals(documentId));
         }
 
+        public async Task<Client?> GetClientByClientVATAsync(Guid clientVAT, CancellationToken cancellationToken = default)
+        {
+            var result = await _dbService.GetClientsAsync(cancellationToken);
+            return result.FirstOrDefault(cl => cl.TenantId.Equals(clientVAT));
+        }
+
         //public async Task<Client?> GetClientWhitelistedByTenantIdAsync(Guid clientId, Guid tenantId, CancellationToken cancellationToken = default)
         //{
         //    var result = await _dbService.GetWhitelistedClientsPerTenantAsync();

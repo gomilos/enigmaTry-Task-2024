@@ -1,6 +1,6 @@
 ﻿using ClientFinancialDocument.Application.Abstractions.Mesaging;
-using ClientFinancialDocument.Domain.Abstraction;
 using ClientFinancialDocument.Domain.Clients;
+using ClientFinancialDocument.Domain.Shared;
 
 namespace ClientFinancialDocument.Application.Clients.Query
 {
@@ -20,7 +20,7 @@ namespace ClientFinancialDocument.Application.Clients.Query
             }
 
 
-            return new ClientResponse(client.ClinetId, client.ClientVAT.ToString());
+            return new ClientResponse(client.ClinetId, client.ClientVAT);
         }
     }
 }
