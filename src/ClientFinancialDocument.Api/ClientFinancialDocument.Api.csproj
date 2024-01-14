@@ -13,9 +13,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ClientFinancialDocument.Application\ClientFinancialDocument.Application.csproj" />
-		<ProjectReference Include="..\ClientFinancialDocument.Domain\ClientFinancialDocument.Domain.csproj" />
-		<ProjectReference Include="..\ClientFinancialDocument.Infrastructure\ClientFinancialDocument.Infrastructure.csproj" />
+	  <ProjectReference Include="..\ClientFinancialDocument.Application\ClientFinancialDocument.Application.csproj" />
+	  <ProjectReference Include="..\ClientFinancialDocument.Domain\ClientFinancialDocument.Domain.csproj" />
+	  <ProjectReference Include="..\ClientFinancialDocument.Infrastructure\ClientFinancialDocument.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

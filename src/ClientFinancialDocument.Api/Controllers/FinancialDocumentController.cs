@@ -1,5 +1,4 @@
 ﻿using ClientFinancialDocument.Api.Extensions;
-using ClientFinancialDocument.Domain.FinancialDocuments;
 using ClientFinancialDocument.Application.Clients.Query;
 using ClientFinancialDocument.Application.Products.Query;
 using ClientFinancialDocument.Application.Tenants.Query;
@@ -20,13 +19,13 @@ namespace ClientFinancialDocument.Api.Controllers
         private readonly ILogger<FinancialDocumentController> _logger;
         private readonly IClientService _clientService;
         private readonly IFinancialDocumentsService _financialDocumentsService;
-        private readonly HandleFinancialDocumentServise _handleFinancialDocumentServise;
+        private readonly IHandleFinancialDocumentServise _handleFinancialDocumentServise;
 
         public FinancialDocumentController(ILogger<FinancialDocumentController> logger,
             ISender sender,
             IClientService clientService,
             IFinancialDocumentsService financialDocumentsService,
-            HandleFinancialDocumentServise handleFinancialDocumentServise)
+            IHandleFinancialDocumentServise handleFinancialDocumentServise)
         {
             _logger = logger;
             _sender = sender;
@@ -39,8 +38,8 @@ namespace ClientFinancialDocument.Api.Controllers
         public async Task<IResult> Get(string productCode, Guid tenantId, Guid documentId, CancellationToken cancellationToken)
         {
             Guard.IsNotNulOrWhiteSpace(productCode, nameof(productCode));
-            Guard.IsNotNulOrWhiteSpace(tenantId.ToString(), nameof(tenantId));
-            Guard.IsNotNulOrWhiteSpace(documentId.ToString(), nameof(documentId));
+            Guard.IsEmptyGuid(tenantId, nameof(tenantId));
+            Guard.IsEmptyGuid(documentId, nameof(documentId));
 
             var product = await _sender.Send(new GetProductQuery(productCode), cancellationToken);
             if (product.IsFailure)

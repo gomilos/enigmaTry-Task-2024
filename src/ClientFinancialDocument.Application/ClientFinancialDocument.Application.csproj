@@ -12,11 +12,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ClientFinancialDocument.Domain\ClientFinancialDocument.Domain.csproj" />
+	  <Folder Include="Services\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Services\" />
+	  <ProjectReference Include="..\ClientFinancialDocument.Domain\ClientFinancialDocument.Domain.csproj" />
 	</ItemGroup>
 
 </Project>
