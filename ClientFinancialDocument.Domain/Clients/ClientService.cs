@@ -1,4 +1,5 @@
-﻿using ClientFinancialDocument.Domain.Shared;
+﻿using ClientFinancialDocument.Domain.Abstraction;
+using ClientFinancialDocument.Domain.Shared;
 
 namespace ClientFinancialDocument.Domain.Clients
 {

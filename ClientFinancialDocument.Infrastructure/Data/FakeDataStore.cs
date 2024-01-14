@@ -12,9 +12,7 @@ namespace ClientFinancialDocument.Infrastructure.Data
         private static readonly List<Product> _products = new();
         private static readonly List<Product> _supportedProducts = new();
         private static readonly List<Tenant> _tenants = new();
-        //private static readonly List<Tenant> _whitelistedTenants = new();
         private static readonly List<Client> _clients = new();
-        //private static readonly Dictionary<Guid, IEnumerable<Client>> _whitelistedClientsPerTenant = new Dictionary<Guid, IEnumerable<Client>>();
         private static readonly List<FinancialDocument> _supportedFd = new();
 
 
@@ -41,8 +39,6 @@ namespace ClientFinancialDocument.Infrastructure.Data
                 new Tenant{Id = 3, TenantId = Guid.NewGuid(), Whitelisted = true},
                 new Tenant{Id = 4, TenantId = Guid.NewGuid(), Whitelisted = false}
             });
-
-            //_whitelistedTenants.AddRange(_tenants.Where(t => t.Whitelisted));
 
             Random rnd = new Random();
             _clients.AddRange(new List<Client>
@@ -96,8 +92,6 @@ namespace ClientFinancialDocument.Infrastructure.Data
                 },
             });
 
-            // _whitelistedClientsPerTenant.Add(_whitelistedTenants.Last().TenantId, _clients.Skip(1).ToList());
-
             _supportedFd.AddRange(new List<FinancialDocument>
             {
                 new FinancialDocument{Id = 1, DocumentId = Guid.NewGuid()},
@@ -105,6 +99,7 @@ namespace ClientFinancialDocument.Infrastructure.Data
                 new FinancialDocument{Id = 3, DocumentId = Guid.NewGuid()},
             });
         }
+
         public async Task<IEnumerable<Product>> GetProductsAsync(CancellationToken cancellationToken = default)
         {
             return await Task.FromResult(_products);
@@ -119,6 +114,7 @@ namespace ClientFinancialDocument.Infrastructure.Data
         {
             return await Task.FromResult(_tenants);
         }
+
         public async Task<IEnumerable<Tenant>> GetWhitelistedTenantsAsync(CancellationToken cancellationToken = default)
         {
             return await Task.FromResult(_tenants.Where(t => t.Whitelisted));

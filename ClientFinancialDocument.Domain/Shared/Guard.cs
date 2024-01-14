@@ -6,7 +6,7 @@
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentNullException(message ?? "The value can't be null", paramName);
+                ArgumentNullException.ThrowIfNull(paramName, message ?? "The value can't be null");
             }
         }
     }

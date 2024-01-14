@@ -1,6 +1,7 @@
 ﻿
 using ClientFinancialDocument.Application.Abstractions.Data;
 using ClientFinancialDocument.Domain.Clients;
+using ClientFinancialDocument.Domain.FinancialDocuments;
 using ClientFinancialDocument.Domain.Products;
 using ClientFinancialDocument.Domain.Tenants;
 using ClientFinancialDocument.Infrastructure.Data;
@@ -17,6 +18,7 @@ namespace ClientFinancialDocument.Infrastructure
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ITenantRepository, TenantRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IFinancialDocumentRepository, FinancialDocumentRepository>();
 
             return services;
         }

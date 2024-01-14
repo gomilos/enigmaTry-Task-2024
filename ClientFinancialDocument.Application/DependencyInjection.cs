@@ -1,4 +1,6 @@
-﻿using ClientFinancialDocument.Domain.Clients;
+﻿using ClientFinancialDocument.Domain.Abstraction;
+using ClientFinancialDocument.Domain.Clients;
+using ClientFinancialDocument.Domain.FinancialDocuments;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ClientFinancialDocument.Application
@@ -25,7 +27,10 @@ namespace ClientFinancialDocument.Application
             // where by that ErrorCode set Response Status to be returned
 
             //services.AddValidatorsFromAssembly(assembly);
+
             services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IFinancialDocumentsService, FinancialDocumentsService>();
+            services.AddScoped<IHandleFinancialDocumentServise, HandleFinancialDocumentServise>();
 
             return services;
         }

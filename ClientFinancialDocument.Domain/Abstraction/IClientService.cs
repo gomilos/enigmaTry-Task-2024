@@ -1,6 +1,6 @@
 ﻿using ClientFinancialDocument.Domain.Shared;
 
-namespace ClientFinancialDocument.Domain.Clients
+namespace ClientFinancialDocument.Domain.Abstraction
 {
     public interface IClientService
     {

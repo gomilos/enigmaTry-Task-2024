@@ -32,16 +32,14 @@ namespace ClientFinancialDocument.Api
                 options.EnableForHttps = true;
             });
 
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddLogging(logging =>
             {
                 logging.AddConfiguration(Configuration.GetSection("Logging"));
                 logging.AddConsole();
                 logging.AddDebug();
             });
-
-            //IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-            //services.AddSingleton(mapper);
-            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

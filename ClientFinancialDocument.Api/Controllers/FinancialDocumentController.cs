@@ -1,8 +1,11 @@
 ﻿using ClientFinancialDocument.Api.Extensions;
+using ClientFinancialDocument.Domain.FinancialDocuments;
 using ClientFinancialDocument.Application.Clients.Query;
 using ClientFinancialDocument.Application.Products.Query;
 using ClientFinancialDocument.Application.Tenants.Query;
+using ClientFinancialDocument.Domain.Abstraction;
 using ClientFinancialDocument.Domain.Clients;
+using ClientFinancialDocument.Domain.Common;
 using ClientFinancialDocument.Domain.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -16,19 +19,23 @@ namespace ClientFinancialDocument.Api.Controllers
         private readonly ISender _sender;
         private readonly ILogger<FinancialDocumentController> _logger;
         private readonly IClientService _clientService;
+        private readonly IFinancialDocumentsService _financialDocumentsService;
+        private readonly HandleFinancialDocumentServise _handleFinancialDocumentServise;
 
         public FinancialDocumentController(ILogger<FinancialDocumentController> logger,
             ISender sender,
-            IClientService clientService)
+            IClientService clientService,
+            IFinancialDocumentsService financialDocumentsService,
+            HandleFinancialDocumentServise handleFinancialDocumentServise)
         {
             _logger = logger;
             _sender = sender;
             _clientService = clientService;
+            _financialDocumentsService = financialDocumentsService;
+            _handleFinancialDocumentServise = handleFinancialDocumentServise;
         }
 
         [HttpGet]
-        //[ProducesResponseType<Product>(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IResult> Get(string productCode, Guid tenantId, Guid documentId, CancellationToken cancellationToken)
         {
             Guard.IsNotNulOrWhiteSpace(productCode, nameof(productCode));
@@ -41,7 +48,7 @@ namespace ClientFinancialDocument.Api.Controllers
                 return product.ToProblemDetails();
             }
 
-            var tenant = await _sender.Send(new GetTenantQuery(tenantId), cancellationToken);
+            var tenant = await _sender.Send(new GetTenantWhitelistedQuery(tenantId), cancellationToken);
             if (tenant.IsFailure)
             {
                 return tenant.ToProblemDetails();
@@ -65,7 +72,15 @@ namespace ClientFinancialDocument.Api.Controllers
                 return clientAdditionalInformation.ToProblemDetails();
             }
 
-            return Results.Ok(product.Value);
+            var finacialDocument = await _financialDocumentsService.GetFinancialDocumentJsonString(tenantId, documentId, cancellationToken);
+            var json = _handleFinancialDocumentServise.ModifyFinancialDocument(finacialDocument, 1000, CompanyType.Large,
+                (ProductCode)Enum.Parse(typeof(ProductCode), productCode));
+            if (json.IsFailure)
+            {
+                return json.ToProblemDetails();
+            }
+
+            return Results.Ok(json.Value);
         }
     }
 }

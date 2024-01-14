@@ -12,12 +12,6 @@ namespace ClientFinancialDocument.Infrastructure.Persistance
             _dbService = dbService;
         }
 
-        public async Task<Tenant?> GetTenantAsync(Guid tenantId, CancellationToken cancellationToken = default)
-        {
-            var results = await _dbService.GetWhitelistedTenantsAsync(cancellationToken);
-            return results.SingleOrDefault(p => p.TenantId.Equals(tenantId));
-        }
-
         public async Task<bool> IsWhitelistedTenantAsync(Guid tenantId, CancellationToken cancellationToken = default)
         {
             var results = await _dbService.GetWhitelistedTenantsAsync(cancellationToken);
