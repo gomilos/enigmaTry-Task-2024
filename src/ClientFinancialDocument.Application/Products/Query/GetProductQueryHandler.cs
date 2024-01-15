@@ -13,13 +13,13 @@ namespace ClientFinancialDocument.Application.Products.Query
             _productRepository = productRepository;
         }
 
-        public async Task<Result<ProductResponse>> Handle(GetProductQuery request, CancellationToken cancellationToken)
+        public async virtual Task<Result<ProductResponse>> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetProductAsync(request.ProductCode, cancellationToken);
 
             if (product is null)
             {
-                return Result.Failure<ProductResponse>(Error.None);
+                return Result.Failure<ProductResponse>(ProductErrors.NotFound);
             }
 
             var isSupportedProduct = await _productRepository.IsSupportedProductAsync(request.ProductCode);

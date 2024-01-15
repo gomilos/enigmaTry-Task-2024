@@ -7,15 +7,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MediatR" Version="12.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ClientFinancialDocument.Application\ClientFinancialDocument.Application.csproj" />
-	  <ProjectReference Include="..\ClientFinancialDocument.Domain\ClientFinancialDocument.Domain.csproj" />
-	  <ProjectReference Include="..\ClientFinancialDocument.Infrastructure\ClientFinancialDocument.Infrastructure.csproj" />
+		<ProjectReference Include="..\ClientFinancialDocument.Application\ClientFinancialDocument.Application.csproj" />
+		<ProjectReference Include="..\ClientFinancialDocument.Domain\ClientFinancialDocument.Domain.csproj" />
+		<ProjectReference Include="..\ClientFinancialDocument.Infrastructure\ClientFinancialDocument.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

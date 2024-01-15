@@ -1,5 +1,4 @@
 ﻿using ClientFinancialDocument.Application.Tenants.Query;
-using ClientFinancialDocument.Domain.Abstraction;
 using ClientFinancialDocument.Domain.Clients;
 using ClientFinancialDocument.Domain.Common;
 using ClientFinancialDocument.Domain.Shared;
@@ -7,18 +6,18 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Dynamic;
+using System.Security.Cryptography;
 using System.Text;
-using XSystem.Security.Cryptography;
 
 namespace ClientFinancialDocument.Domain.FinancialDocuments
 {
-    public class HandleFinancialDocumentServise : IHandleFinancialDocumentServise
+    public class HandleFinancialDocumentService : IHandleFinancialDocumentService
     {
         private readonly IConfiguration _configuration;
         private readonly HashSet<string> _leaveFealds;
         private readonly HashSet<string> _hashFealds;
 
-        public HandleFinancialDocumentServise(IConfiguration configuration)
+        public HandleFinancialDocumentService(IConfiguration configuration)
         {
             _configuration = configuration;
             _leaveFealds = !string.IsNullOrEmpty(_configuration["Anonymize:Default:leave"]) ?
@@ -33,7 +32,9 @@ namespace ClientFinancialDocument.Domain.FinancialDocuments
             {
                 return Result.Failure<dynamic>(FinancialDocumentErrors.NotValidFormat);
             }
+
             ExtendManipulationFieldsConfiguration(productCode);
+
             var anonymizedJson = AnonymizeFinancialDocument(jsonString);
             return ExtendFinancialDocument(anonymizedJson, registrationMumber, companyType);
         }
@@ -127,14 +128,14 @@ namespace ClientFinancialDocument.Domain.FinancialDocuments
             return "####";
         }
 
-        private string HasheProperty(string value)
+        private static string HasheProperty(string value)
         {
             if (String.IsNullOrEmpty(value))
             {
                 return String.Empty;
             }
 
-            using (var sha = new SHA256Managed())
+            using (SHA256 sha = SHA256.Create())
             {
                 byte[] textBytes = Encoding.UTF8.GetBytes(value);
                 byte[] hashBytes = sha.ComputeHash(textBytes);

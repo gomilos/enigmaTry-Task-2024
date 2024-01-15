@@ -1,6 +1,6 @@
 ﻿using ClientFinancialDocument.Domain.Shared;
 
-namespace ClientFinancialDocument.Domain.Products
+namespace ClientFinancialDocument.Application.Products.Query
 {
     public static class ProductErrors
     {

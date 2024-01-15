@@ -2,7 +2,6 @@
 using ClientFinancialDocument.Application.Exceptions;
 using ClientFinancialDocument.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace ClientFinancialDocument.Api.Middleware
 {
@@ -65,6 +64,13 @@ namespace ClientFinancialDocument.Api.Middleware
                 "Validation error",
                     "One or more validation errors has occurred",
                     validationException.Errors),
+
+                ArgumentNullException argumentNullException => new ExceptionDetails(
+                      StatusCodes.Status400BadRequest,
+                      "ArgumentNullException",
+                      "Argument Null Exception",
+                      argumentNullException.Message,
+                      null),
 
                 _ => new ExceptionDetails(
                     StatusCodes.Status500InternalServerError,

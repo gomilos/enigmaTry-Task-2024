@@ -1,4 +1,4 @@
-﻿namespace ClientFinancialDocument.Domain.Abstraction
+﻿namespace ClientFinancialDocument.Domain.FinancialDocuments
 {
     public interface IFinancialDocumentsService
     {

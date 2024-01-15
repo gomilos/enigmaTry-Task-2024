@@ -1,6 +1,4 @@
-﻿using ClientFinancialDocument.Domain.Abstraction;
-
-namespace ClientFinancialDocument.Domain.FinancialDocuments
+﻿namespace ClientFinancialDocument.Domain.FinancialDocuments
 {
     public sealed class FinancialDocumentsService : IFinancialDocumentsService
     {

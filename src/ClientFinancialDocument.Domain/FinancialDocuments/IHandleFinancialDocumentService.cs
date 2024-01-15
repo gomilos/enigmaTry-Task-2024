@@ -2,9 +2,9 @@
 using ClientFinancialDocument.Domain.Common;
 using ClientFinancialDocument.Domain.Shared;
 
-namespace ClientFinancialDocument.Domain.Abstraction
+namespace ClientFinancialDocument.Domain.FinancialDocuments
 {
-    public interface IHandleFinancialDocumentServise
+    public interface IHandleFinancialDocumentService
     {
         Result<dynamic> ModifyFinancialDocument(string jsonString, int registrationMumber, CompanyType companyType, ProductCode productCode);
     }

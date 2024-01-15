@@ -1,5 +1,4 @@
-﻿using ClientFinancialDocument.Domain.Abstraction;
-using ClientFinancialDocument.Domain.Clients;
+﻿using ClientFinancialDocument.Domain.Clients;
 using ClientFinancialDocument.Domain.FinancialDocuments;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,7 +29,7 @@ namespace ClientFinancialDocument.Application
 
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IFinancialDocumentsService, FinancialDocumentsService>();
-            services.AddScoped<IHandleFinancialDocumentServise, HandleFinancialDocumentServise>();
+            services.AddScoped<IHandleFinancialDocumentService, HandleFinancialDocumentService>();
 
             return services;
         }
