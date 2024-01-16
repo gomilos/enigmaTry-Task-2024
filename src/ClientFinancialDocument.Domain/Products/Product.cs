@@ -5,5 +5,6 @@ namespace ClientFinancialDocument.Domain.Products
     public sealed class Product : Entity
     {
         public string ProductCode { get; set; } = string.Empty;
+        public bool Supported { get; set; }
     }
 }

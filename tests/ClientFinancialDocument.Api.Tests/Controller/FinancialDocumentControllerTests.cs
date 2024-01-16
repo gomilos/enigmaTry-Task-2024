@@ -168,19 +168,11 @@ namespace ClientFinancialDocument.Api.Tests.Controller
                 .ReturnsAsync(Result.Success(It.IsAny<ClientAdditionalInformationResponse>()));
 
             _financialDocumentsServiceMock.Setup(fd => fd.GetFinancialDocumentJsonString(tenantId, documentId, default))
-                .ReturnsAsync(MockFinancialDocument.FDForProductA);//It.IsAny<string>
+                .ReturnsAsync(MockFinancialDocument.FDForProductA);
 
             _handleFinancialDocumentServiceMock.Setup(hfd => hfd.ModifyFinancialDocument(It.IsAny<string>(), It.IsAny<int>(),
                 It.IsAny<CompanyType>(), It.IsAny<ProductCode>()))
-                .Returns(MockFinancialDocument.FDForProductAAnonimizedAndExtended);//It.IsAny<Result<dynamic>>
-
-            //var handlerMock = new Mock<GetProductQueryHandler>();
-            //handlerMock.Setup(h => h.Handle(new GetProductQuery(productCode), default))
-            //.ReturnsAsync(It.IsAny<Result<ProductResponse>>());
-
-            //Mock<IProductRepository> _productRepositoryMock = new();
-            //_productRepositoryMock.Setup(p => p.GetProductAsync(productCode, default))
-            //    .ReturnsAsync(productObj);
+                .Returns(MockFinancialDocument.FDForProductAAnonimizedAndExtended);
 
             // act
 

@@ -7,7 +7,7 @@ namespace ClientFinancialDocument.Infrastructure.Persistance
     {
         public async Task<string> GetDocument(Guid tenantId, Guid documentId, CancellationToken cancellationToken = default)
         {
-            //FIXME: check how it depends type for FD per ProductCode
+            //FIXME: check how Fin docu structure depends on ProductCode, so we need some kind of Factory for Fin Docu
             return await Task.FromResult(MockFinancialDocuments.FDForProductA);
         }
     }

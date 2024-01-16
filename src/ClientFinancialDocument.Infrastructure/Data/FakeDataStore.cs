@@ -10,7 +10,6 @@ namespace ClientFinancialDocument.Infrastructure.Data
     public class FakeDataStore : IDataBaseStore
     {
         private static readonly List<Product> _products = new();
-        private static readonly List<Product> _supportedProducts = new();
         private static readonly List<Tenant> _tenants = new();
         private static readonly List<Client> _clients = new();
         private static readonly List<FinancialDocument> _supportedFd = new();
@@ -20,16 +19,10 @@ namespace ClientFinancialDocument.Infrastructure.Data
         {
             _products.AddRange(new List<Product>
             {
-                new Product { Id = 1, ProductCode = ProductCode.ProductA.ToString() },
-                new Product { Id = 2, ProductCode = ProductCode.ProductB.ToString() },
-                new Product { Id = 3, ProductCode = ProductCode.ProductC.ToString() },
-                new Product { Id = 4, ProductCode = ProductCode.ProductD.ToString() }
-            });
-
-            _supportedProducts.AddRange(new List<Product>
-            {
-                new Product { Id = 1, ProductCode = SupportedProductCode.ProductA.ToString() },
-                new Product { Id = 2, ProductCode = SupportedProductCode.ProductB.ToString() },
+                new Product { Id = 1, ProductCode = ProductCode.ProductA.ToString(), Supported = true },
+                new Product { Id = 2, ProductCode = ProductCode.ProductB.ToString(), Supported = true },
+                new Product { Id = 3, ProductCode = ProductCode.ProductC.ToString(), Supported = false },
+                new Product { Id = 4, ProductCode = ProductCode.ProductD.ToString(), Supported = false }
             });
 
             _tenants.AddRange(new List<Tenant>
@@ -107,7 +100,7 @@ namespace ClientFinancialDocument.Infrastructure.Data
 
         public async Task<IEnumerable<Product>> GetSupportedProductsAsync(CancellationToken cancellationToken = default)
         {
-            return await Task.FromResult(_supportedProducts);
+            return await Task.FromResult(_products.Where(p => p.Supported == true));
         }
 
         public async Task<IEnumerable<Tenant>> GetTenantsAsync(CancellationToken cancellationToken = default)
