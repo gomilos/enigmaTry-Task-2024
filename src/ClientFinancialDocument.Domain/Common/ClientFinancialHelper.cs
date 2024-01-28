@@ -4,8 +4,6 @@
     {
         ProductA,
         ProductB
-        //ProductC, 
-        //ProductD,
     }
 
     public enum ProductCode

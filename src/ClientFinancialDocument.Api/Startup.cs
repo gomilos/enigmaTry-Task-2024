@@ -14,7 +14,6 @@ namespace ClientFinancialDocument.Api
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddJsonFile($"appsettings.{compName}.json", optional: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.tap.json", optional: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
